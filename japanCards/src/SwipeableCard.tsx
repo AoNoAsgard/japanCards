@@ -65,7 +65,7 @@ const SwipeableCard: React.FC = () => {
     const canSwipe = currentIndex >= 0
 
     // set last direction and decrease current index
-    const swiped = (nameToDelete: number, index: number) => {
+    const swiped = ( index: number) => {
         updateCurrentIndex(index - 1)
     }
     const resetFilters = () => {
@@ -137,7 +137,7 @@ const SwipeableCard: React.FC = () => {
                         ref={childRefs[index]}
                         className='swipe'
                         key={card.id}
-                        onSwipe={() => swiped(card.id, index)}
+                        onSwipe={() => swiped(index)}
                         onCardLeftScreen={() => outOfFrame(index)}
                     >
                         <FlippableCard card={card}/>

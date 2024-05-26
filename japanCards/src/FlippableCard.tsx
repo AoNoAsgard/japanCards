@@ -66,7 +66,7 @@ const FlippableCard: React.FC<FlippableCardProps> = (props: FlippableCardProps) 
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-            }} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            }} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onTouchStart={handleMouseDown} onTouchEnd={handleMouseUp}>
                 {card.CATEGORIA&&<Typography fontSize={15}>categoria: {card.CATEGORIA}</Typography>}
                 {kanji&&<Typography fontSize={45}>{card.KANJI}</Typography>}
                 {hiragana&&<Typography fontSize={30}>{card.KANA}</Typography>}
@@ -83,7 +83,7 @@ const FlippableCard: React.FC<FlippableCardProps> = (props: FlippableCardProps) 
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-            }} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            }} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onTouchStart={handleMouseDown} onTouchEnd={handleMouseUp}>
                 <Typography fontSize={45}>{card.ITALIANO}</Typography>
                 <Typography fontSize={30}>{card.ROMAJI}</Typography>
                 {card.PARTICELLA&&<Typography fontSize={25}>Particella: {card.PARTICELLA}</Typography>}
