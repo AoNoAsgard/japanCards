@@ -16,6 +16,7 @@ const TABLE_AVVERBI:CardValues[] = vocaboli.AVVERBI
 const TABLE_SUFFISSI:CardValues[] = vocaboli.SUFFISSI
 const TABLE_ESPRESSIONI:CardValues[] = vocaboli.ESPRESSIONI
 
+const MAXCARDS=50
 //const db = [{ id: 1, kanji: 'kanji', hiragana: 'hiragana', romanji: 'romanji', traduzione: 'traduzione', }]
 type TinderCardInstance = {
     swipe: (dir?: string) => Promise<void>;
@@ -23,10 +24,10 @@ type TinderCardInstance = {
 };
 const SwipeableCard: React.FC = () => {
     const [cards,setCards]=useState<CardValues[]>([])
-    const [currentIndex, setCurrentIndex] = useState(cards.length - 1)
+    const [currentIndex, setCurrentIndex] = useState(MAXCARDS-1)
     const { checkboxes } = useCheckboxContext()
     useEffect(()=>{
-        setCurrentIndex(cards.length - 1)
+        updateCurrentIndex(MAXCARDS-1)
     },[cards])
 
     const [NOMI, setNOMI] = useState<boolean>(checkboxes[2])
@@ -43,16 +44,16 @@ const SwipeableCard: React.FC = () => {
         setSUFFISSI(checkboxes['SUFFISSI'])
         setESPRESSIONI(checkboxes['ESPRESSIONI'])
     }, [checkboxes, checkboxes['NOMI'], checkboxes['AGGETTIVI'], checkboxes['VERBI'], checkboxes['AVVERBI'], checkboxes['SUFFISSI'], checkboxes['ESPRESSIONI']])
+    
     useEffect(()=>{
         resetFilters()
     },[NOMI,AGGETTIVI, VERBI,AVVERBI,SUFFISSI,ESPRESSIONI])
-    console.log(checkboxes)
 
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
 
     const childRefs = useMemo<React.RefObject<TinderCardInstance>[]>(() =>
-        Array(cards.length).fill(0).map(() => React.createRef<TinderCardInstance>()), []
+        Array(cards.length).fill(0).map(() => React.createRef<TinderCardInstance>()), [cards]
     );
 
     const updateCurrentIndex = (val: number) => {
@@ -60,7 +61,7 @@ const SwipeableCard: React.FC = () => {
         currentIndexRef.current = val
     }
 
-    const canGoBack = currentIndex < cards.length - 1
+    const canGoBack = currentIndex < MAXCARDS-1
 
     const canSwipe = currentIndex >= 0
 
@@ -107,7 +108,7 @@ const SwipeableCard: React.FC = () => {
         setCards(db.sort(() => Math.random() - 0.5))    }
 
     const outOfFrame = (idx: number) => {
-        console.log(`(${idx}) left the screen!`, currentIndexRef.current)
+        //console.log(`(${idx}) left the screen!`, currentIndexRef.current)
         // handle the case in which go back is pressed before card goes outOfFrame
         currentIndexRef.current >= idx && childRefs[idx].current?.restoreCard()
         // TODO: when quickly swipe and restore multiple times the same card,
@@ -132,11 +133,11 @@ const SwipeableCard: React.FC = () => {
     return (
         <Box>
             <Box className='cardContainer' sx={{ width: 350, height: 400, marginTop: 5, marginBottom: 5 }}>
-                {cards.slice(0, 50).map((card, index) => (
+                {cards.slice(0, MAXCARDS).map((card, index) => (
                     <TinderCard
                         ref={childRefs[index]}
                         className='swipe'
-                        key={card.id}
+                        key={index}
                         onSwipe={() => swiped(index)}
                         onCardLeftScreen={() => outOfFrame(index)}
                     >

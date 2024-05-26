@@ -34,7 +34,6 @@ const FlippableCard: React.FC<FlippableCardProps> = (props: FlippableCardProps) 
         setHiragana(checkboxes['hiragana'])
         setKanji(checkboxes['kanji'])
     },[checkboxes,checkboxes['hiragana'],checkboxes['kanji']])
-    console.log(checkboxes)
 
     const handleMouseDown = useCallback(() => {
         setClickStartTime(Date.now());
