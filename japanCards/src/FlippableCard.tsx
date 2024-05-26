@@ -28,6 +28,9 @@ const FlippableCard: React.FC<FlippableCardProps> = (props: FlippableCardProps) 
     const [clickStartTime, setClickStartTime] = useState<number | null>(null);
     const {checkboxes} = useCheckboxContext()
 
+    useEffect(()=>{
+        setFlipped(false)
+    },[card,card.KANA])
     const [kanji,setKanji] = useState<boolean>(checkboxes[0])
     const [hiragana,setHiragana] = useState<boolean>(checkboxes[1])
     useEffect(()=>{

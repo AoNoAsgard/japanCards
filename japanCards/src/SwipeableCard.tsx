@@ -105,7 +105,11 @@ const SwipeableCard: React.FC = () => {
             db = db.concat(TABLE_SUFFISSI)
             db = db.concat(TABLE_ESPRESSIONI)
         }
-        setCards(db.sort(() => Math.random() - 0.5))    }
+        setCards(db.sort(() => Math.random() - 0.5))    
+        updateCurrentIndex(MAXCARDS - 1)
+
+        childRefs.map((ref)=>{ref.current?.restoreCard()})
+    }
 
     const outOfFrame = (idx: number) => {
         //console.log(`(${idx}) left the screen!`, currentIndexRef.current)
