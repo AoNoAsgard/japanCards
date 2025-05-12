@@ -6,12 +6,12 @@ import FlippableCard, { CardValues } from './FlippableCard';
 import vocaboli from '../public/vocaboli.json'
 import { useCheckboxContext } from './CheckboxContext';
 
+
+
 const TABLE_NOMI:CardValues[] = vocaboli.NOMI
 const TABLE_AGGETTIVII:CardValues[] = vocaboli['AGGETTIVI - I']
 const TABLE_AGGETTIVINA:CardValues[] = vocaboli['AGGETTIVI - NA']
 const TABLE_VERBI:CardValues[] = vocaboli.VERBI
-const TABLE_AVVTEMPORALI:CardValues[] = vocaboli['AVV. TEMPORALI']
-const TABLE_AVVLUOGO:CardValues[] = vocaboli['AVV. LUOGO']
 const TABLE_AVVERBI:CardValues[] = vocaboli.AVVERBI
 const TABLE_SUFFISSI:CardValues[] = vocaboli.SUFFISSI
 const TABLE_ESPRESSIONI:CardValues[] = vocaboli.ESPRESSIONI
@@ -82,8 +82,6 @@ const SwipeableCard: React.FC = () => {
             db = db.concat(TABLE_VERBI)
         }
         if(AVVERBI){
-            db = db.concat(TABLE_AVVTEMPORALI)
-            db = db.concat(TABLE_AVVLUOGO)
             db = db.concat(TABLE_AVVERBI)
         }
         if(SUFFISSI){
@@ -99,8 +97,6 @@ const SwipeableCard: React.FC = () => {
             db = db.concat(TABLE_AGGETTIVII)
             db = db.concat(TABLE_AGGETTIVINA)
             db = db.concat(TABLE_VERBI)
-            db = db.concat(TABLE_AVVTEMPORALI)
-            db = db.concat(TABLE_AVVLUOGO)
             db = db.concat(TABLE_AVVERBI)
             db = db.concat(TABLE_SUFFISSI)
             db = db.concat(TABLE_ESPRESSIONI)

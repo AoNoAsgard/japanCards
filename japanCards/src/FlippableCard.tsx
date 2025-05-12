@@ -5,7 +5,7 @@ import { useCheckboxContext } from "./CheckboxContext";
 
 export type CardValues= {
     ITALIANO:string,
-    KANJI:string,
+    KANJI?:string,
     KANA:string,
     ROMAJI:string,
     FUKUSHI?:string,
